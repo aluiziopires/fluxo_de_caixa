@@ -3,15 +3,24 @@ package application;
 import java.util.Locale;
 import java.util.Scanner;
 
+import entities1.Contas_semana;
+
 public class Fluxo_de_caixa {
 
 	public static void main(String[] args) {
 
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner (System.in);
-		int menu, ano;
+		int menu, ano, numPags;
 		double saldoInicial;
 		String mes;
+		
+		do {
+			
+		menu=0;
+		saldoInicial=0;
+		ano=0;
+		numPags=0;
 		
 		System.out.println("Controle de fluxo de caixa.");
 		System.out.println(" ");
@@ -21,29 +30,42 @@ public class Fluxo_de_caixa {
 		System.out.println(" ");
 		System.out.print("Digite a opção desejada: ");
 		menu=sc.nextInt();
-		System.out.println(" ");
+		System.out.println(" ");		
+			
+		switch (menu) {
 		
-		saldoInicial=0;
-		
-		if (menu==1) {
-		
+		case 1:
+			Contas_semana[] vect = new Contas_semana[numPags];
+			sc.nextLine();
+			System.out.println("- Fluxo de caixa semanal -");
+			System.out.println(" ");
 			System.out.print("Digite o saldo inicial da semana: R$ ");
 			saldoInicial=sc.nextDouble();
 			System.out.println(" ");
+			System.out.print("Digite o número de pagamentos realizados durante a semana: ");
+			numPags=sc.nextInt();
+			System.out.println(" ");
 			
-		}
-		
-		else if (menu==2) {
+			for (int i=0; i<numPags; i++) {
+				sc.nextLine();
+				System.out.print("Dia do pagamento: ");
+				String dia = sc.nextLine();
+				System.out.print("Valor do pagamento: R$ ");
+				double valorPago = sc.nextDouble();
+				vect[i] = new Contas_semana(dia, valorPago);
+				
+				}
+		break;
+			
+		case 2:
 		
 			System.out.print("Digite o mês de lançamento: ");
 			mes=sc.nextLine();
 			System.out.print("Digite o saldo inicial do mês: R$ ");
 			saldoInicial=sc.nextDouble();
 			System.out.println(" ");
-			
-		}
-		
-		else {
+					
+		case 3:
 		
 			System.out.print("Digite o ano de lançamento: ");
 			ano=sc.nextInt();
@@ -53,6 +75,10 @@ public class Fluxo_de_caixa {
 			
 		}
 		
+		}while (menu<4);
+		
 		sc.close();	
+	
 	}
 }
+
