@@ -2,20 +2,20 @@ package entities1;
 
 public class Contas_semana {
 
-	private String dia;
+	private String diaC;
 	private double valorPago;
 	
-	public Contas_semana(String dia, double valorPago) {
-		this.dia = dia;
+	public Contas_semana(String diaC, double valorPago) {
+		this.diaC = diaC;
 		this.valorPago = valorPago;
 	}
 
-	public String getDia() {
-		return dia;
+	public String getDiaC() {
+		return diaC;
 	}
 
-	public void setDia(String dia) {
-		this.dia = dia;
+	public void setDiaC(String diaC) {
+		this.diaC = diaC;
 	}
 
 	public double getValorPago() {
@@ -25,5 +25,5 @@ public class Contas_semana {
 	public void setValorPago(double valorPago) {
 		this.valorPago = valorPago;
 	}
-		
+	
 }
