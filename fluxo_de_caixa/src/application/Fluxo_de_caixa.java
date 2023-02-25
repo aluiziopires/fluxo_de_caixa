@@ -31,6 +31,7 @@ public class Fluxo_de_caixa {
 		System.out.println("1 - Semanal");
 		System.out.println("2 - Mensal");
 		System.out.println("3 - Anual");
+		System.out.println("4 - Sair");
 		System.out.println(" ");
 		System.out.print("Digite a opção desejada: ");
 		menu=sc.nextInt();
@@ -167,13 +168,56 @@ public class Fluxo_de_caixa {
 				System.out.println(" ");
 				}
 			
+			somaContas=0;
+			somaRecebimentos=0;
 			
+			for (int i=0; i<numPags; i++) {
+				somaContas+=vect3[i].getValorPagoMes();
+			}
 			
+			for (int i=0; i<numReceb; i++) {
+				somaRecebimentos+=vect4[i].getValorRecebidoMes();
+			}
+			
+			saldoFinal=saldoInicial-somaContas+somaRecebimentos;
+			
+			System.out.println("Valores pagos durante o mês");
+			System.out.println(" ");
+			
+			for (int i=0; i<numPags; i++) {
+				System.out.printf(vect3[i].getDataC()+": ");
+				System.out.printf(vect3[i].getValorPagoMes()+" ");
+				System.out.println(" ");
+			}
+			
+			System.out.println(" ");
+			System.out.println("Valores recebidos durante o mês");
+			System.out.println(" ");
+			
+			for (int i=0; i<numReceb; i++) {
+				System.out.printf(vect4[i].getDataR()+": ");
+				System.out.printf(vect4[i].getValorRecebidoMes()+" ");
+				System.out.println(" ");
+			}
+			
+			System.out.println(" ");
+			System.out.printf("Saldo inicial em "+ mes +": R$ " + saldoInicial);
+			System.out.println(" ");
+			System.out.printf("Contas a pagar em " + mes +": R$ " + somaContas);
+			System.out.println(" ");
+			System.out.printf("Contas a receber em " + mes +": R$ " + somaRecebimentos);
+			System.out.println(" ");
+			System.out.printf("Saldo final em " + mes +": R$ " + saldoFinal);
+			System.out.println(" ");
+			System.out.println(" ");
 			
 		break;	
 			
 		case 3:
 		
+			System.out.println("- Fluxo de caixa anual -");
+			System.out.println(" ");
+			sc.nextLine();
 			System.out.print("Digite o ano de lançamento: ");
 			ano=sc.nextInt();
 			System.out.print("Digite o saldo inicial do ano: R$ ");
@@ -181,8 +225,14 @@ public class Fluxo_de_caixa {
 			System.out.println(" ");
 		
 		break;	
+					
+		case 4:
 			
-		}
+			System.out.print("Programa encerrado!");
+		
+		}	
+		
+		break;	
 		
 		}while (menu<4);
 		
