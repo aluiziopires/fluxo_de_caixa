@@ -1,5 +1,8 @@
 package application;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -7,10 +10,12 @@ import Entities4.Receber_mes;
 import entities1.Contas_semana;
 import entities2.Receber_semana;
 import entities3.Contas_mes;
+import entities5.Contas_ano;
+import entities6.Receber_ano;
 
 public class Fluxo_de_caixa {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner (System.in);
@@ -73,6 +78,7 @@ public class Fluxo_de_caixa {
 				sc.nextLine();
 				System.out.print("Dia do recebimento: ");
 				String diaR = sc.nextLine();
+				System.out.println(" ");
 				System.out.print("Valor do recebimento: R$ ");
 				double valorRecebido = sc.nextDouble();
 				vect2[i] = new Receber_semana(diaR, valorRecebido);
@@ -89,39 +95,47 @@ public class Fluxo_de_caixa {
 			for (int i=0; i<numReceb; i++) {
 				somaRecebimentos+=vect2[i].getValorRecebido();
 			}
+				
+			FileWriter arq = new FileWriter("C:\\Users\\Aluizio 2\\Documents\\Arquivos Eclipse\\relatoriosemanal.txt");
+			PrintWriter gravarArq = new PrintWriter(arq);
 			
-			System.out.println("Valores pagos durante a semana");
-			System.out.println(" ");
-			
+			gravarArq.printf("Valores pagos durante a semana%n");
+			gravarArq.printf("%n");
+						
 			for (int i=0; i<numPags; i++) {
-				System.out.printf(vect[i].getDiaC()+": ");
-				System.out.printf(vect[i].getValorPago()+" ");
-				System.out.println(" ");
-			}
+				gravarArq.printf(vect[i].getDiaC()+": ");
+				gravarArq.printf(vect[i].getValorPago()+"%n");
+				gravarArq.printf("%n");
+				}
 			
-			System.out.println(" ");
-			System.out.println("Valores recebidos durante a semana");
-			System.out.println(" ");
-			
+			gravarArq.printf("Valores recebidos durante a semana%n");
+			gravarArq.printf("%n");
+						
 			for (int i=0; i<numReceb; i++) {
-				System.out.printf(vect2[i].getDiaR()+": ");
-				System.out.printf(vect2[i].getValorRecebido()+" ");
-				System.out.println(" ");
-			}
-			
+				gravarArq.printf(vect2[i].getDiaR()+": ");
+				gravarArq.printf(vect2[i].getValorRecebido()+" %n");
+				gravarArq.printf("%n");
+				}
+						
 			saldoFinal=saldoInicial-somaContas+somaRecebimentos;
 			
-			System.out.println(" ");
-			System.out.printf("Saldo inicial da semana: R$ " + saldoInicial);
-			System.out.println(" ");
-			System.out.printf("Contas a pagar da semana: R$ " + somaContas);
-			System.out.println(" ");
-			System.out.printf("Contas a receber da semana: R$ " + somaRecebimentos);
-			System.out.println(" ");
-			System.out.printf("Saldo final da semana: R$ " + saldoFinal);
-			System.out.println(" ");
-			System.out.println(" ");
-						
+			gravarArq.printf("%n");
+			gravarArq.printf("RESUMO");
+			gravarArq.printf("%n");
+			gravarArq.printf("Saldo inicial da semana: R$ " + saldoInicial);
+			gravarArq.printf("%n");
+			gravarArq.printf("Contas a pagar da semana: R$ " + somaContas);
+			gravarArq.printf("%n");
+			gravarArq.printf("Contas a receber da semana: R$ " + somaRecebimentos);
+			gravarArq.printf("%n");
+			gravarArq.printf("Saldo final da semana: R$ " + saldoFinal);
+			gravarArq.printf("%n");
+			gravarArq.printf("%n");
+			
+			arq.close();
+			
+			System.out.println("Arquivo salvo!");
+			
 		break;
 			
 		case 2:
@@ -181,35 +195,42 @@ public class Fluxo_de_caixa {
 			
 			saldoFinal=saldoInicial-somaContas+somaRecebimentos;
 			
-			System.out.println("Valores pagos durante o mês");
-			System.out.println(" ");
+			FileWriter arq2 = new FileWriter("C:\\Users\\Aluizio 2\\Documents\\Arquivos Eclipse\\relatoriomensal.txt");
+			PrintWriter gravarArq2 = new PrintWriter(arq2);
+			
+			gravarArq2.printf("Valores pagos durante o mês%n");
+			gravarArq2.printf("%n");
 			
 			for (int i=0; i<numPags; i++) {
-				System.out.printf(vect3[i].getDataC()+": ");
-				System.out.printf(vect3[i].getValorPagoMes()+" ");
-				System.out.println(" ");
+				gravarArq2.printf("Dia " +vect3[i].getDataC()+": ");
+				gravarArq2.printf(vect3[i].getValorPagoMes()+"%n ");
 			}
 			
-			System.out.println(" ");
-			System.out.println("Valores recebidos durante o mês");
-			System.out.println(" ");
+			gravarArq2.printf("%n");
+			gravarArq2.printf("Valores recebidos durante o mês%n");
+			gravarArq2.printf("%n");
 			
 			for (int i=0; i<numReceb; i++) {
-				System.out.printf(vect4[i].getDataR()+": ");
-				System.out.printf(vect4[i].getValorRecebidoMes()+" ");
-				System.out.println(" ");
+				gravarArq2.printf("Dia " +vect4[i].getDataR()+": ");
+				gravarArq2.printf(vect4[i].getValorRecebidoMes()+"%n ");
 			}
 			
-			System.out.println(" ");
-			System.out.printf("Saldo inicial em "+ mes +": R$ " + saldoInicial);
-			System.out.println(" ");
-			System.out.printf("Contas a pagar em " + mes +": R$ " + somaContas);
-			System.out.println(" ");
-			System.out.printf("Contas a receber em " + mes +": R$ " + somaRecebimentos);
-			System.out.println(" ");
-			System.out.printf("Saldo final em " + mes +": R$ " + saldoFinal);
-			System.out.println(" ");
-			System.out.println(" ");
+			gravarArq2.printf("%n");
+			gravarArq2.printf("RESUMO%n");
+			gravarArq2.printf("%n");
+			gravarArq2.printf("Saldo inicial em "+ mes +": R$ " + saldoInicial+"%n");
+			gravarArq2.printf("%n");
+			gravarArq2.printf("Contas a pagar em " + mes +": R$ " + somaContas+"%n");
+			gravarArq2.printf("%n");
+			gravarArq2.printf("Contas a receber em " + mes +": R$ " + somaRecebimentos+"%n");
+			gravarArq2.printf("%n");
+			gravarArq2.printf("Saldo final em " + mes +": R$ " + saldoFinal+"%n");
+			gravarArq2.printf("%n");
+			gravarArq2.printf("%n");
+			
+			arq2.close();
+			
+			System.out.println("Arquivo salvo!");
 			
 		break;	
 			
@@ -224,6 +245,91 @@ public class Fluxo_de_caixa {
 			saldoInicial=sc.nextDouble();
 			System.out.println(" ");
 		
+			System.out.print("Digite o número de pagamentos durante o ano: ");
+			numPags=sc.nextInt();
+			
+			Contas_ano[] vect5 = new Contas_ano[numPags];
+			System.out.println(" ");
+			
+			for (int i=0; i<numPags; i++) {	
+				sc.nextLine();
+				System.out.print("Mês do pagamento: ");
+				String mesC = sc.nextLine();
+				System.out.print("Valor do pagamento: R$ ");
+				double valorPagoAno = sc.nextDouble();
+				vect5[i] = new Contas_ano(mesC, valorPagoAno);
+				System.out.println(" ");
+				
+				}
+			
+			System.out.println(" ");
+			System.out.print("Digite o número de recebimentos durante o ano: ");
+			numReceb=sc.nextInt();
+						
+			Receber_ano[] vect6 = new Receber_ano[numReceb];
+			System.out.println(" ");
+			
+			for (int i=0; i<numReceb; i++) {
+				sc.nextLine();
+				System.out.print("Mês do recebimento: ");
+				String mesR = sc.nextLine();
+				System.out.print("Valor do recebimento: R$ ");
+				double valorRecebidoAno = sc.nextDouble();
+				vect6[i] = new Receber_ano(mesR, valorRecebidoAno);
+				System.out.println(" ");
+				}
+			
+			somaContas=0;
+			somaRecebimentos=0;
+			
+			for (int i=0; i<numPags; i++) {
+				somaContas+=vect5[i].getValorPagoAno();
+			}
+			
+			for (int i=0; i<numReceb; i++) {
+				somaRecebimentos+=vect6[i].getValorRecebidoAno();
+			}
+			
+			saldoFinal=saldoInicial-somaContas+somaRecebimentos;
+			
+			FileWriter arq3 = new FileWriter("C:\\Users\\Aluizio 2\\Documents\\Arquivos Eclipse\\relatorioanual.txt");
+			PrintWriter gravarArq3 = new PrintWriter(arq3);
+			
+			gravarArq3.printf("Valores pagos durante " +ano+"%n");
+			gravarArq3.printf("%n");
+			
+			for (int i=0; i<numPags; i++) {
+				gravarArq3.printf(vect5[i].getMesC()+": ");
+				gravarArq3.printf(vect5[i].getValorPagoAno()+"%n ");
+				gravarArq3.printf("%n");
+			}
+			
+			gravarArq3.printf("Valores recebidos durante " +ano+"%n");
+			gravarArq3.printf("%n");
+			
+			for (int i=0; i<numReceb; i++) {
+				gravarArq3.printf(vect6[i].getMesR()+": ");
+				gravarArq3.printf(vect6[i].getValorRecebidoAno()+"%n ");
+				gravarArq3.printf("%n");
+			}
+			
+			gravarArq3.printf("%n");
+			gravarArq3.printf("RESUMO%n");
+			gravarArq3.printf("%n");
+			gravarArq3.printf("Saldo inicial em "+ ano +": R$ " + saldoInicial+"%n");
+			gravarArq3.printf("%n");
+			gravarArq3.printf("Contas a pagar em " + ano +": R$ " + somaContas+"%n");
+			gravarArq3.printf("%n");
+			gravarArq3.printf("Contas a receber em " + ano +": R$ " + somaRecebimentos+"%n");
+			gravarArq3.printf("%n");
+			gravarArq3.printf("Saldo final em " + ano +": R$ " + saldoFinal+"%n");
+			gravarArq3.printf("%n");
+			gravarArq3.printf("%n");
+			
+			arq3.close();
+			
+			System.out.println("Arquivo salvo!");
+			
 		break;	
 					
 		case 4:
@@ -237,7 +343,5 @@ public class Fluxo_de_caixa {
 		}while (menu<4);
 		
 		sc.close();	
-	
 	}
 }
-
