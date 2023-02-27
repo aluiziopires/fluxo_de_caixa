@@ -78,7 +78,6 @@ public class Fluxo_de_caixa {
 				sc.nextLine();
 				System.out.print("Dia do recebimento: ");
 				String diaR = sc.nextLine();
-				System.out.println(" ");
 				System.out.print("Valor do recebimento: R$ ");
 				double valorRecebido = sc.nextDouble();
 				vect2[i] = new Receber_semana(diaR, valorRecebido);
@@ -96,7 +95,7 @@ public class Fluxo_de_caixa {
 				somaRecebimentos+=vect2[i].getValorRecebido();
 			}
 				
-			FileWriter arq = new FileWriter("C:\\Users\\Aluizio 2\\Documents\\Arquivos Eclipse\\relatoriosemanal.txt");
+			FileWriter arq = new FileWriter("C:\\relatoriosemanal.txt");
 			PrintWriter gravarArq = new PrintWriter(arq);
 			
 			gravarArq.printf("Valores pagos durante a semana%n");
@@ -195,7 +194,7 @@ public class Fluxo_de_caixa {
 			
 			saldoFinal=saldoInicial-somaContas+somaRecebimentos;
 			
-			FileWriter arq2 = new FileWriter("C:\\Users\\Aluizio 2\\Documents\\Arquivos Eclipse\\relatoriomensal.txt");
+			FileWriter arq2 = new FileWriter("C:\\relatoriomensal.txt");
 			PrintWriter gravarArq2 = new PrintWriter(arq2);
 			
 			gravarArq2.printf("Valores pagos durante o mês%n");
@@ -292,7 +291,7 @@ public class Fluxo_de_caixa {
 			
 			saldoFinal=saldoInicial-somaContas+somaRecebimentos;
 			
-			FileWriter arq3 = new FileWriter("C:\\Users\\Aluizio 2\\Documents\\Arquivos Eclipse\\relatorioanual.txt");
+			FileWriter arq3 = new FileWriter("C:\\relatorioanual.txt");
 			PrintWriter gravarArq3 = new PrintWriter(arq3);
 			
 			gravarArq3.printf("Valores pagos durante " +ano+"%n");
@@ -335,7 +334,6 @@ public class Fluxo_de_caixa {
 		case 4:
 			
 			System.out.print("Programa encerrado!");
-		
 		}	
 		
 		break;	
